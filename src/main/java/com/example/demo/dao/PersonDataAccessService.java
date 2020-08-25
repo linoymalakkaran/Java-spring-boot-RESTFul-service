@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("postgres")
 public class PersonDataAccessService implements PersonDao {
@@ -20,7 +18,18 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        return 0;
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("id",id);
+//        params.put("name",person.getName());
+//        int status = jdbcTemplate.update(
+//                "INSERT INTO person (id, name) VALUES (?, ?)",
+//                params
+//        );
+        int status = jdbcTemplate.update(
+                "INSERT INTO person (id, name) VALUES (?, ?)",
+                id, person.getName()
+        );
+        return status;
     }
 
     @Override
@@ -49,11 +58,22 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public int deletePersonById(UUID id) {
-        return 0;
+        int status = jdbcTemplate.update(
+                "DELETE FROM person WHERE id = ?",
+                id
+        );
+        return status;
     }
 
     @Override
     public int updatePersonById(UUID id, Person person) {
-        return 0;
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("id",id);
+//        params.put("name",person.getName());
+        int status = jdbcTemplate.update(
+                "UPDATE person set name = ? WHERE id = ?",
+                person.getName(), id
+        );
+        return status;
     }
 }

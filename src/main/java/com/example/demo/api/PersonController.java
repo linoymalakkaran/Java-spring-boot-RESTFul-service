@@ -22,28 +22,28 @@ public class PersonController {
     }
 
     @PostMapping
-    public  void addPerson(@Valid @NonNull @RequestBody Person person){
+    public void addPerson(@Valid @NonNull @RequestBody Person person) {
         personService.addPerson(person);
     }
 
     @GetMapping
-    public List<Person> GetAllPeople(){
-       return personService.GetAllPeople();
+    public List<Person> GetAllPeople() {
+        return personService.GetAllPeople();
     }
 
-    @GetMapping(path="{id}")
-    public Person getPersonById(@PathVariable UUID id){
+    @GetMapping(path = "{id}")
+    public Person getPersonById(@PathVariable UUID id) {
         return personService.getPersonById(id)
                 .orElse(null);
     }
 
-    @DeleteMapping(path="{id}")
-    public  int deletePersonById(@PathVariable("id") UUID id){
-        return  personService.deletePersonById(id);
+    @DeleteMapping(path = "{id}")
+    public int deletePersonById(@PathVariable("id") UUID id) {
+        return personService.deletePersonById(id);
     }
 
-    @PutMapping(path="{id}")
-    public  int updatePersonById(@PathVariable("id") UUID id,@Valid @NonNull @RequestBody Person newPerson){
-        return  personService.updatePersonById(id, newPerson);
+    @PutMapping(path = "{id}")
+    public int updatePersonById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person newPerson) {
+        return personService.updatePersonById(id, newPerson);
     }
 }
